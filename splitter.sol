@@ -6,8 +6,9 @@ contract Splitter {
     
     event LogSplitFunds(address sender, uint amount);
     event LogSetAddresses(address sender, address bob, address carol);
+    event LogWithdraw(msg.sender, withdrawBalance);
     
-    function split(address receiver1, address receiver2) public payable {
+    function splitFunds(address receiver1, address receiver2) public payable {
         
         require(msg.value > 0 );
         uint half = msg.value / 2;        
@@ -23,16 +24,16 @@ contract Splitter {
         
     }
     
-    function Withdraw(uint withdrawBalance) public payable {
+    function withdrawFunds(uint withdrawBalance) public payable {
         
         require(withdrawBalance != 0 );
         require(withdrawBalance >= balances[msg.sender]);
         balances[msg.sender] -= withdrawBalance;
         withdrawBalance == 0;
         msg.sender.transfer(withdrawBalance);
-        event LogWithdraw(address sender, balances bob, balances carol, uint amount);
         
     }
+
     
 
         
